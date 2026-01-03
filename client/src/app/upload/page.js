@@ -192,36 +192,40 @@ export default function UploadPage() {
                         {loading ? 'AI 분석 중...' : '계약서 분석하기'}
                     </button>
 
-                    <div style={{ marginTop: '20px', padding: '15px', backgroundColor: '#f0f5ff', borderRadius: '12px', display: 'flex', flexDirection: 'column', gap: '10px', minWidth: '300px', textAlign: 'left' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <p style={{ fontSize: '15px', fontWeight: '600', color: '#0046ff', margin: 0 }}>
-                                내 보유 포인트: <span style={{ fontSize: '20px' }}>{points.toLocaleString()}</span> P
-                            </p>
+                    <div style={{ marginTop: '20px', padding: '20px', backgroundColor: '#f0f7ff', borderRadius: '12px', border: '1px solid #cce5ff', textAlign: 'center' }}>
+                        <p style={{ fontSize: '15px', fontWeight: '600', color: '#0056b3', marginBottom: '15px' }}>
+                            내 보유 포인트: <span style={{ fontSize: '24px', color: '#0046ff' }}>{points.toLocaleString()}</span> P
                             <span
                                 onClick={() => user && fetchPoints(user.id)}
-                                style={{ cursor: 'pointer', fontSize: '11px', color: '#888', textDecoration: 'underline' }}
+                                style={{ cursor: 'pointer', fontSize: '12px', color: '#666', textDecoration: 'underline', marginLeft: '10px' }}
                             >
-                                새로고침
+                                🔄
                             </span>
-                        </div>
+                        </p>
+
                         <button
                             onClick={handleRecharge}
                             style={{
-                                padding: '8px 12px',
-                                fontSize: '13px',
-                                fontWeight: '600',
+                                padding: '12px 20px',
+                                fontSize: '15px',
+                                fontWeight: '700',
                                 color: '#fff',
                                 backgroundColor: '#0046ff',
                                 border: 'none',
-                                borderRadius: '6px',
+                                borderRadius: '8px',
                                 cursor: 'pointer',
-                                width: '100%'
+                                width: '100%',
+                                boxShadow: '0 4px 6px rgba(0,70,255,0.2)',
+                                transition: 'transform 0.1s ease'
                             }}
+                            onMouseDown={(e) => e.target.style.transform = 'scale(0.98)'}
+                            onMouseUp={(e) => e.target.style.transform = 'scale(1)'}
                         >
-                            ⚡ 포인트 충전하기
+                            ⚡ 1초만에 10,000 P 충전하기 (테스트)
                         </button>
-                        <p style={{ fontSize: '12px', color: '#666', marginTop: '5px', marginBottom: 0 }}>
-                            * 계약서 분석 1회 진행 시 100포인트가 차감됩니다.
+
+                        <p style={{ fontSize: '12px', color: '#888', marginTop: '15px', marginBottom: 0 }}>
+                            * 계약서 분석 1회당 100 P 차감
                         </p>
                     </div>
 
