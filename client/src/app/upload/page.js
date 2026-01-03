@@ -125,6 +125,29 @@ export default function UploadPage() {
         setFormData({ party_a: '', party_b: '', amount: '', date: '', summary: '' });
     };
 
+    const handleRecharge = async () => {
+        if (!confirm('10,000 포인트를 충전하시겠습니까? (테스트 결제)')) return;
+
+        try {
+            // Mock Recharge - simply add points
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/payments/complete`, {
+                contractId: 'point_charge_' + Date.now(), // Dummy ID
+                pgTid: 'std_pay_' + Date.now(),
+                amount: 10000,
+                status: 'success',
+                method: 'card_recharge'
+            });
+
+            if (res.data.success) {
+                alert('포인트 충전이 완료되었습니다.');
+                fetchPoints(user.id);
+            }
+        } catch (err) {
+            console.error(err);
+            alert('충전 중 오류가 발생했습니다.');
+        }
+    };
+
     return (
         <div className="container" style={{
             backgroundColor: '#ffffff',
@@ -169,7 +192,7 @@ export default function UploadPage() {
                         {loading ? 'AI 분석 중...' : '계약서 분석하기'}
                     </button>
 
-                    <div style={{ marginTop: '20px', padding: '15px', backgroundColor: '#f0f5ff', borderRadius: '12px', display: 'inline-block', minWidth: '300px', textAlign: 'left' }}>
+                    <div style={{ marginTop: '20px', padding: '15px', backgroundColor: '#f0f5ff', borderRadius: '12px', display: 'flex', flexDirection: 'column', gap: '10px', minWidth: '300px', textAlign: 'left' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <p style={{ fontSize: '15px', fontWeight: '600', color: '#0046ff', margin: 0 }}>
                                 내 보유 포인트: <span style={{ fontSize: '20px' }}>{points.toLocaleString()}</span> P
@@ -181,6 +204,22 @@ export default function UploadPage() {
                                 새로고침
                             </span>
                         </div>
+                        <button
+                            onClick={handleRecharge}
+                            style={{
+                                padding: '8px 12px',
+                                fontSize: '13px',
+                                fontWeight: '600',
+                                color: '#fff',
+                                backgroundColor: '#0046ff',
+                                border: 'none',
+                                borderRadius: '6px',
+                                cursor: 'pointer',
+                                width: '100%'
+                            }}
+                        >
+                            ⚡ 포인트 충전하기
+                        </button>
                         <p style={{ fontSize: '12px', color: '#666', marginTop: '5px', marginBottom: 0 }}>
                             * 계약서 분석 1회 진행 시 100포인트가 차감됩니다.
                         </p>
