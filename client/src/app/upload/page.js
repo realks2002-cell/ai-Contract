@@ -118,6 +118,13 @@ export default function UploadPage() {
         }
     };
 
+    const handleReset = () => {
+        setOcrData(null);
+        setFile(null);
+        setPreview(null);
+        setFormData({ party_a: '', party_b: '', amount: '', date: '', summary: '' });
+    };
+
     return (
         <div className="container" style={{
             backgroundColor: '#ffffff',
@@ -308,6 +315,28 @@ export default function UploadPage() {
                             onChange={(e) => setFormData({ ...formData, summary: e.target.value })}
                             placeholder="AI가 요약한 내용이 여기에 표시됩니다."
                         />
+                    </div>
+
+                    <div style={{ marginTop: '50px', textAlign: 'center', borderTop: '1px solid #eee', paddingTop: '30px' }}>
+                        <button
+                            onClick={handleReset}
+                            style={{
+                                padding: '15px 40px',
+                                fontSize: '16px',
+                                fontWeight: '600',
+                                borderRadius: '12px',
+                                border: '1px solid #ddd',
+                                backgroundColor: '#fff',
+                                color: '#555',
+                                cursor: 'pointer',
+                                transition: 'all 0.2s ease',
+                                boxShadow: '0 2px 5px rgba(0,0,0,0.05)'
+                            }}
+                            onMouseOver={(e) => e.target.style.backgroundColor = '#f9f9f9'}
+                            onMouseOut={(e) => e.target.style.backgroundColor = '#fff'}
+                        >
+                            ⬅ 이전 페이지로 이동 (파일 다시 선택)
+                        </button>
                     </div>
 
                 </div>
