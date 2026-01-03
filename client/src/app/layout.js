@@ -11,6 +11,10 @@ export const metadata = {
         statusBarStyle: 'default',
         title: 'AI계약서',
     },
+    icons: {
+        icon: '/icon-192x192.png',
+        apple: '/apple-touch-icon.png',
+    }
 }
 
 export default function RootLayout({ children }) {
