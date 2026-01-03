@@ -8,11 +8,8 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors({
-  origin: '*', // Allow all origins for MVP/Vercel compatibility
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+app.use(cors());
+app.options('*', cors());
 app.use(express.json());
 
 // Request Logger

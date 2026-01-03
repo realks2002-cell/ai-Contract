@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
-const { v4: uuidv4 } = require('uuid');
+const crypto = require('crypto');
 
 // Request Payment
 router.post('/request', async (req, res) => {
@@ -16,7 +16,7 @@ router.post('/request', async (req, res) => {
         }
 
         // Return a mock PG Transaction ID
-        const pgTid = 'PG_' + uuidv4();
+        const pgTid = 'PG_' + crypto.randomUUID();
 
         res.json({
             success: true,

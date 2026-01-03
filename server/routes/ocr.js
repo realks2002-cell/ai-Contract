@@ -201,7 +201,8 @@ router.post('/analyze', upload.single('contractImage'), async (req, res) => {
                 };
             }
 
-            const imageUrl = `http://localhost:${process.env.PORT || 8000}/${filePath.replace(/\\/g, '/')}`;
+            const host = req.get('host');
+            const imageUrl = `${req.protocol}://${host}/${filePath.replace(/\\/g, '/')}`;
 
             // Deduct points after successful analysis
             await db.query('UPDATE users SET points = points - 100 WHERE id = $1', [userId]);
