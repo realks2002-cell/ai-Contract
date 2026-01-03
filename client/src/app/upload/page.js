@@ -30,7 +30,7 @@ export default function UploadPage() {
 
     const fetchPoints = async (userId) => {
         try {
-            const res = await axios.get(`http://localhost:8000/api/auth/points/${userId}`);
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/auth/points/${userId}`);
             if (res.data.success) {
                 setPoints(res.data.points);
             }
@@ -69,7 +69,7 @@ export default function UploadPage() {
         uploadData.append('userId', user.id);
 
         try {
-            const res = await axios.post('http://localhost:8000/api/ocr/analyze', uploadData, {
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/ocr/analyze`, uploadData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
 
@@ -103,7 +103,7 @@ export default function UploadPage() {
         try {
             // Clean amount (remove commas) just in case, though state stores raw value
             const cleanAmount = formData.amount.toString().replace(/,/g, '');
-            const res = await axios.post('http://localhost:8000/api/ocr/confirm', {
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/ocr/confirm`, {
                 userId: user.id,
                 contractData: { ...formData, amount: cleanAmount },
                 imageUrl: ocrData.imageUrl

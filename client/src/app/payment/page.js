@@ -19,7 +19,7 @@ export default function PaymentPage() {
         setStatus('processing');
         try {
             // 1. Request Payment (Get TID)
-            const resReq = await axios.post('http://localhost:8000/api/payments/request', {
+            const resReq = await axios.post(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/payments/request`, {
                 contractId,
                 amount: 1000000, // Mock Amount since we didn't fetch contract. ideally contract.amount
                 method: 'card'
@@ -29,7 +29,7 @@ export default function PaymentPage() {
                 // 2. Simulate User Interaction with PG (Time delay)
                 setTimeout(async () => {
                     // 3. Complete Payment/Webhook
-                    const resComp = await axios.post('http://localhost:8000/api/payments/complete', {
+                    const resComp = await axios.post(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/payments/complete`, {
                         contractId,
                         pgTid: resReq.data.pgTid,
                         amount: resReq.data.amount,

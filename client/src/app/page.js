@@ -14,7 +14,7 @@ export default function Home() {
         setLoading(true);
         try {
             // Connecting to Backend API
-            const res = await axios.post('http://localhost:8000/api/auth/login', {
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/auth/login`, {
                 username, // Send username instead of email
                 password
             });
