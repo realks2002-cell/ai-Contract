@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
-const { v4: uuidv4 } = require('uuid'); // Mock CI generator
+const crypto = require('crypto');
 
 // MOCK PASS Certification Step
 router.post('/pass-cert', (req, res) => {
     // Simulate PASS API call
-    const mockCI = uuidv4();
-    const mockDI = uuidv4();
+    const mockCI = crypto.randomUUID();
+    const mockDI = crypto.randomUUID();
 
     res.json({
         success: true,
