@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('../db');
 const crypto = require('crypto');
 
-// Request Payment
+// Request Payment - Crypto Update
 router.post('/request', async (req, res) => {
     const { contractId, amount, method } = req.body;
 
